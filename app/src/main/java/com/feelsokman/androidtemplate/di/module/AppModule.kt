@@ -6,8 +6,6 @@ import android.content.res.Resources
 import com.feelsokman.androidtemplate.BuildConfig
 import com.feelsokman.androidtemplate.core.coroutine.DefaultDispatcherProvider
 import com.feelsokman.androidtemplate.core.coroutine.DispatcherProvider
-import com.feelsokman.androidtemplate.preferences.AppPreferences
-import com.feelsokman.androidtemplate.preferences.LocalAppPreferences
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -63,9 +61,5 @@ class AppModule {
     internal fun providesDispatcherProvider(): DispatcherProvider {
         return DefaultDispatcherProvider()
     }
-
-    @Provides
-    @Singleton
-    internal fun providesPreferences(context: Context): AppPreferences = LocalAppPreferences(context)
 
 }

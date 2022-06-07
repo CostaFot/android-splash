@@ -4,9 +4,7 @@ import android.app.Application
 import com.feelsokman.androidtemplate.TemplateApplication
 import com.feelsokman.androidtemplate.di.module.AppModule
 import com.feelsokman.androidtemplate.di.module.NetworkModule
-import com.feelsokman.androidtemplate.di.module.UseCaseModule
 import com.feelsokman.androidtemplate.di.module.ViewModelModule
-import com.feelsokman.androidtemplate.di.module.WorkModule
 import com.feelsokman.androidtemplate.ui.activity.MainActivity
 import com.feelsokman.androidtemplate.ui.activity.di.MainActivityModule
 import com.feelsokman.androidtemplate.ui.fragments.another.AnotherFragment
@@ -22,8 +20,6 @@ import javax.inject.Singleton
     modules = [
         AppModule::class,
         NetworkModule::class,
-        UseCaseModule::class,
-        WorkModule::class,
         ViewModelModule::class,
         HostViewModelsModule::class,
         AnotherViewModelsModule::class,

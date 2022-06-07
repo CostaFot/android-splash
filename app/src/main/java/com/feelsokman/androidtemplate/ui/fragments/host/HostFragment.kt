@@ -8,10 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import com.feelsokman.androidtemplate.databinding.FragmentHostBinding
 import com.feelsokman.androidtemplate.di.component.AppComponent
 import com.feelsokman.androidtemplate.di.getComponent
@@ -20,21 +16,14 @@ import com.feelsokman.androidtemplate.ui.activity.viewmodel.MainViewModel
 import com.feelsokman.androidtemplate.ui.base.BaseFragment
 import com.feelsokman.androidtemplate.ui.fragments.host.viewmodel.HostViewModel
 import com.feelsokman.androidtemplate.utilities.viewmodel.ViewModelFactory
-import com.feelsokman.androidtemplate.work.DoSomethingWorker
 import javax.inject.Inject
 
-class HostFragment : BaseFragment(), ViewBinder.Callback {
-    override fun onButtonClicked() {
-        //
-    }
+class HostFragment : BaseFragment() {
 
     @Inject internal lateinit var viewModelFactory: ViewModelFactory
-    @Inject internal lateinit var workManager: WorkManager
+
     private val viewModelHost by viewModels<HostViewModel> { viewModelFactory }
     private val activityViewModel by activityViewModels<MainViewModel>()
-
-    private lateinit var viewBinder: ViewBinder
-
     private var _binding: FragmentHostBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
@@ -65,17 +54,6 @@ class HostFragment : BaseFragment(), ViewBinder.Callback {
 
         binding.button.setOnClickListener {
 
-            // workmanager example
-            val constraints = Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED)
-                .setRequiresCharging(true)
-                .build()
-
-            val uploadWorkRequest = OneTimeWorkRequestBuilder<DoSomethingWorker>()
-                .setConstraints(constraints)
-                .build()
-
-            workManager.enqueue(uploadWorkRequest)
         }
     }
 

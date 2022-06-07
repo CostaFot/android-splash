@@ -3,8 +3,6 @@ plugins {
     kotlin("android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
-    greet
-    todo
     packaging
 }
 
@@ -27,10 +25,7 @@ android {
 
     signingConfigs {
         create("release") {
-            /*keyAlias keystoreProperties['releaseKeyAlias']
-              keyPassword keystoreProperties['releaseKeyPassword']
-              storeFile rootProject.file("keystore.jks")
-              storePassword keystoreProperties['releaseStorePassword']*/
+         //
         }
     }
 
@@ -53,28 +48,17 @@ android {
         }
     }
 
-    flavorDimensions.addAll(listOf("style", "monetize"))
+    flavorDimensions.addAll(listOf("style"))
 
     productFlavors {
-        create("templateStyle") {
+        create("splash") {
             dimension = "style"
-            applicationIdSuffix = ".templateStyle"
-            versionNameSuffix = "-templateStyle"
-            resValue("string", "app_name", "Android Template")
+            applicationIdSuffix = ".splash"
+            versionNameSuffix = "-splash"
             versionCode = 1
             versionName = "0.1"
-        }
 
-        create("free") {
-            dimension = "monetize"
-            applicationIdSuffix = ".free"
-            versionNameSuffix = "-free"
-        }
-
-        create("premium") {
-            dimension = "monetize"
-            applicationIdSuffix = ".premium"
-            versionNameSuffix = "-premium"
+            resValue("string", "app_name", "Splashy Splash")
         }
     }
 
@@ -104,6 +88,8 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
+    implementation("androidx.core:core-splashscreen:1.0.0-rc01")
 
     implementation(Support.appCompat)
     implementation(Support.material)
@@ -166,15 +152,3 @@ dependencies {
     androidTestImplementation(TestingLib.runner)
     androidTestImplementation(TestingLib.espresso)
 }
-
-
-// Configure the extension using a DSL block
-greeting {
-    // Replace defaults here if you want
-}
-
-todo {
-    // Replace defaults here if you want
-    id = 2
-}
-

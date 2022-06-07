@@ -2,13 +2,10 @@ package com.feelsokman.androidtemplate.ui.fragments.another.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.feelsokman.androidtemplate.usecase.GetStringFromStorageUseCase
 import timber.log.Timber
 import javax.inject.Inject
 
-class AnotherViewModel @Inject constructor(
-    private val getStringFromStorageUseCase: GetStringFromStorageUseCase
-) : ViewModel() {
+class AnotherViewModel @Inject constructor() : ViewModel() {
 
     val textData = MutableLiveData<String>()
 

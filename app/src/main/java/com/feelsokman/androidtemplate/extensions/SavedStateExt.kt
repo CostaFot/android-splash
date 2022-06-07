@@ -20,7 +20,7 @@ fun FragmentActivity.savedState(
     key: String = SavedState.Key,
     defaultBundle: () -> Bundle? = { intent?.extras }
 ): Lazy<SavedState> = lazy {
-    SavedState({ this }, key, defaultBundle).also { savedState ->
+    SavedState(owner = { this }, key = key, defaultBundle = defaultBundle).also { savedState ->
         savedState.registerSavedStateProvider()
     }
 }
@@ -110,9 +110,7 @@ class SavedState constructor(
 
     fun <T> property(
         getValue: Bundle.(String) -> T
-    ): ReadOnlyProperty<Any, T> = object : ReadOnlyProperty<Any, T> {
-        override operator fun getValue(thisRef: Any, property: KProperty<*>): T = savedState.getValue(property.name)
-    }
+    ): ReadOnlyProperty<Any, T> = ReadOnlyProperty<Any, T> { thisRef, property -> savedState.getValue(property.name) }
 
     fun <T> property(
         getValue: Bundle.(String) -> T,
